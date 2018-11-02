@@ -47,6 +47,6 @@ module.exports = {
   // 编译入口文件
   cilentEntry: resolveApp('src/webui/index'),
   // 编译出口文件
-  cilentOutput: resolveApp('build/static'),
+  cilentOutput: resolveApp('public'),
   
 };

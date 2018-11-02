@@ -30,6 +30,7 @@
     "react-router-dom": "^4.3.1",
     "redux-devtools-extension": "^2.13.5",
     "redux-thunk": "^2.3.0",
+    "template_js": "^0.7.1-1",
     "webpack": "^4.23.1"
   },
   "devDependencies": {

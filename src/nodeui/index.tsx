@@ -7,7 +7,7 @@ export const app = new Koa();
 
 import App from '../webui/app'
 
-app.use(serve('/Users/chenjunlin/blog/myBlogClient/build/static'))
+app.use(serve('/Users/chenjunlin/blog/myBlogClient/public'))
 
 app.use(async (ctx) => {
     const temp = renderToString((
