@@ -1,37 +1,30 @@
-const gulp = require('gulp');
+const { series, watch, src, dest } = require('gulp');
 const ts = require('gulp-typescript');
 const webpack = require('webpack-stream');
-const minifyejs = require("gulp-minify-ejs")
-const nodemon = require('gulp-nodemon')
-const watch = require('gulp-watch')
+const minifyejs = require('gulp-minify-ejs');
 const tsProject = ts.createProject('tsconfig.json');
 
-gulp.task('client', () => {
-  return gulp.src('src/webui/*.tsx')
-  .pipe(webpack(require('./config/webpack.dev.client')))
-  .pipe(gulp.dest('public'))
-})
+function client(cb) {
+  src('src/webui/*.tsx')
+    .pipe(webpack(require('./config/webpack.dev.client')))
+    .pipe(dest('public'));
+  cb();
+}
 
-gulp.task('ejs', () => {
-  return gulp.src('src/nodeui/views/*.ejs')
-  .pipe(minifyejs())
-  .pipe(gulp.dest('build/nodeui/views'))
-})
+function ejs(cb) {
+  src('src/nodeui/views/*.ejs')
+    .pipe(minifyejs())
+    .pipe(dest('build/nodeui/views'));
+  cb();
+}
 
-gulp.task('server', () => {
-  return gulp.src(['src/**/*.ts', 'src/**/*.tsx'])
+function server(cb) {
+  src(['src/**/*.ts', 'src/**/*.tsx'])
     .pipe(tsProject())
-    .pipe(gulp.dest('build/'))
-})
+    .pipe(dest('build/'));
+  cb();
+}
 
-gulp.task('default', gulp.series(gulp.parallel('client', 'ejs', 'server'), (done) => {
-  watch('src', batch(function (events, done) {
-    gulp.start('build', done);
-  }));
-  nodemon({
-    script: 'build/app.js',
-    ext: 'js ejs',
-    env: { 'NODE_ENV': 'development' },
-    done: done
-  })
-}))
+watch('src',{},series(client, ejs, server))
+
+exports.default = series(client, ejs, server);
