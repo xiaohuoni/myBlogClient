@@ -25,6 +25,6 @@ function server(cb) {
   cb();
 }
 
-watch('src',{},series(client, ejs, server))
+watch('src',{queue: true}, series(client, ejs, server))
 
 exports.default = series(client, ejs, server);

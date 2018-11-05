@@ -8,12 +8,9 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import AppRouter from './router';
 import counterApp from './store/reducer';
 
-// const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
 const preloadedState = (window as any).__PRELOADED_STATE__
 
 delete (window as any).__PRELOADED_STATE__
-// , preloadedState
 
 const store = createStore(counterApp, preloadedState, composeWithDevTools(
   applyMiddleware(reduxThunk)
