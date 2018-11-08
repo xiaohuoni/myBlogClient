@@ -24,7 +24,7 @@ https://github.com/logictuLuoqi/myBlogClient
 
 做当然是可以做的，但复杂度确实也大了不少  
 
-## 怎么做呢 介意大家先把我的项目跑起来
+## 怎么做呢 建议大家先把我的项目跑起来
 
 ```bash
     git clone git@github.com:logictuLuoqi/myBlogClient.git
